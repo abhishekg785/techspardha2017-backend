@@ -13,6 +13,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
+var Model = require('./models/model');
 
 var app = express();
 
@@ -29,39 +30,86 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/auth',auth);
-
+var routes = require('./routes/index');
+var auth = require('./routes/auth');
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+// app.use(function(req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
+//
+// // error handlers
+//
+// // development error handler
+// // will print stacktrace
+// if (app.get('env') === 'development') {
+//   app.use(function(err, req, res, next) {
+//     res.status(err.status || 500);
+//     res.render('error', {
+//       message: err.message,
+//       error: err
+//     });
+//   });
+// }
+//
+// // production error handler
+// // no stacktraces leaked to user
+// app.use(function(err, req, res, next) {
+//   res.status(err.status || 500);
+//   res.render('error', {
+//     message: err.message,
+//     error: {}
+//   });
+// });
+
+passport.use(new LocalStrategy(function(username, password, done) {
+   new Model.User({username: username}).fetch().then(function(data) {
+      var user = data;
+      if(user === null) {
+         return done(null, false, {message: 'Invalid username or password'});
+      } else {
+         user = data.toJSON();
+         if(!bcrypt.compareSync(password, user.password)) {
+            return done(null, false, {message: 'Invalid username or password'});
+         } else {
+            return done(null, user);
+         }
+      }
+   });
+}));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.username);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+passport.deserializeUser(function(username, done) {
+   new Model.User({username: username}).fetch().then(function(user) {
+      done(null, user);
+   });
 });
 
+
+
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(session({secret: 'secret code'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/', routes.index);
+
+app.get('/auth/login', auth.logIn);
+
+app.post('/auth/login', auth.signInPost);
+
+app.get('/auth/signup', auth.signUp);
+
+app.post('/auth/signup', auth.signUpPost);
+
+app.get('/auth/signout', auth.signOut);
+
+// 404 not found
+//app.use(auth.notFound404);
 
 module.exports = app;

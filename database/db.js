@@ -1,16 +1,15 @@
-var Bookshelf = require('bookshelf');
+var knex = require('knex')({
+        client: 'mysql',
+        connection: {
+            host: 'localhost',
+            user: 'root',
+            password: 'root',
+            database: 'techspardha2017',
+            charset  : 'utf8'
+        }
+    });
 
-var config = {
-   host: 'localhost',  // your host
-   user: 'root', // your database user
-   password: 'root', // your database password
-   database: 'techspardha2017',
-   charset: 'UTF8_GENERAL_CI'
-};
 
-var DB = Bookshelf.initialize({
-   client: 'mysql',
-   connection: config
-});
+var Bookshelf = require('bookshelf')(knex);
 
-module.exports.DB = DB;
+module.exports.DB = Bookshelf;
