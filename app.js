@@ -32,8 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'secret code'}));
 app.use(passport.initialize());
 app.use(passport.session());
-
-catch 404 and forward to error handler
+/*
+//catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
@@ -63,7 +63,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
+*/
 passport.use(new LocalStrategy(function(username, password, done) {
   new Model.User({username: username}).fetch().then(function(data) {
     var user = data;
