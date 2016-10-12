@@ -32,6 +32,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'secret code'}));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/',index);
+app.use('/auth',auth);
+
 /*
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -89,8 +93,5 @@ passport.deserializeUser(function(username, done) {
     done(null, user);
   });
 });
-
-app.use('/',index);
-app.use('/auth',auth);
 
 module.exports = app;
