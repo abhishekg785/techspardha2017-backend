@@ -87,11 +87,11 @@ router.post('/details',function(req, res, next){
 
   detailsPromise.then(function(model) {
       if(model) {
-         res.render('redirection');
+         res.render('redirection',{title: 'Success', user: username});
       } else {
          var fillUserDetails = new Model.Details({username: username, rollNo: rollNo, phoneNo: phoneNo, interests: stringOfInterests});
          fillUserDetails.save().then(function(model) {
-            res.render('redirection');
+            res.render('redirection',{title: 'Success', user: username});
          });
       }
    });

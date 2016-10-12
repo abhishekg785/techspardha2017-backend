@@ -16,10 +16,10 @@ router.get('/',function(req, res, next) {
     //res.render('index', {title: 'Home', user: username});
     var detailsPromise = null;
     detailsPromise = new Model.Details({username: username}).fetch();
-  
+    
     detailsPromise.then(function(model){
       if(model) {
-         res.render('redirection');
+         res.render('redirection',{title: 'Success', user: username});
       }else{
         res.render('details', {title: 'Home', user: username});
       }
