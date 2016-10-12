@@ -13,7 +13,7 @@ create table if not exists studentUsers(
 )engine=innodb;
 
 create table if not exists studentDetails(
-    username varchar(100) REFERENCES studentUsers (username) NOT NULL,
+    username varchar(100) REFERENCES studentUsers (username) ,
     rollNo integer(10) NOT NULL,
     phoneNo integer(15) NOT NULL,
     interests varchar(200) NOT NULL,
@@ -21,4 +21,13 @@ create table if not exists studentDetails(
     year varchar(20) NOT NULL,
     college varchar(50) NOT NULL,
     gender varchar(10) NOT NULL
+)engine=innodb;
+
+create table if not exists eventsList(
+  eventName varchar(100) NOT NULL,
+  description varchar(100) NOT NULL,
+  venue varchar(100) NOT NULL,
+  `time` varchar(100), /*To be changed to time later on*/
+  status varchar(100) NOT NULL,
+  coordinator varchar(100) NOT NULL
 )engine=innodb;
