@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lan="en">
+	<head>
+		<title>
+			Interests
+		</title>
+	</head>
+	<body>
+		<form method="post" action="/auth/details">
+			<p>
+				<label for="username">Username</label>
+				<input type="text" name="username" id="username" value= <%= user %> readonly />
+			</p>
+			<p>
+			    <label for="RollNo">RollNo</label>
+			    <input type="text" name="rollNo" id="rollNo" placeholder="RollNo"/>
+			</p>
+			<p>
+				<label for="phoneNo">Phone No</label>
+				<input type="phoneNo" name="phoneNo" id="phoneNo" placeholder="phoneNo"/>
+			</p>
+			<p>
+				<label for="interest">Interests</label>
+				<br/>
+				<input type="checkbox" name="interests" value="technical">Technical</input>
+				<input type="checkbox" name="interests" value="managerial">Managerial</input>
+				<input type="checkbox" name="interests" value="cultural">Cultural</input>
+			</p>
+			<p>
+				<input type="submit" name="info" id="info" value="Submit"/>
+			</p>
+		</form>
+	</body>
+</html>

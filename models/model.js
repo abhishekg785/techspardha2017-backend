@@ -5,6 +5,12 @@ var studentUsers = DB.Model.extend({
    idAttribute: 'Id',
 });
 
+var studentDetails = DB.Model.extend({
+    tableName: 'studentDetails',
+    idAttribute: 'Id',
+});
+
 module.exports = {
-   User: studentUsers
+   User: studentUsers,
+   Details: studentDetails
 };
