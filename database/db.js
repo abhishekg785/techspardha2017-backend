@@ -1,12 +1,14 @@
+var config = require('../config.js');
+
 var knex = require('knex')({
   client: 'mysql',
   connection: {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'techspardha2017',
-    charset  : 'utf8'
-    }
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database,
+    charset  : config.charset
+  }
 });
 
 var Bookshelf = require('bookshelf')(knex);
