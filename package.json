@@ -15,7 +15,7 @@
     "express": "~4.13.1",
     "express-session": "^1.14.1",
     "jade": "~1.11.0",
-    "knex": "^0.12.3",
+    "knex": "*",
     "morgan": "~1.6.1",
     "mysql": "*",
     "passport": "*",
