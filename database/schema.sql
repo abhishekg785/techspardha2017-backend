@@ -13,7 +13,7 @@ create table if not exists studentUsers(
 )engine=innodb;
 
 create table if not exists studentDetails(
-    username varchar(100) REFERENCES studentUsers (username) ,
+    Id integer REFERENCES studentUsers (Id) ,
     rollNo integer(10) NOT NULL,
     phoneNo integer(15) NOT NULL,
     interests varchar(200) NOT NULL,
@@ -24,10 +24,20 @@ create table if not exists studentDetails(
 )engine=innodb;
 
 create table if not exists eventsList(
-  eventName varchar(100) NOT NULL,
+  eventName varchar(100) PRIMARY KEY,
   description varchar(100) NOT NULL,
   venue varchar(100) NOT NULL,
   `time` varchar(100), /*To be changed to time later on*/
-  status varchar(100) NOT NULL,
-  coordinator varchar(100) NOT NULL
+  status varchar(100) NOT NULL
+)engine=innodb;
+
+create table if not exists coordinatorPanel(
+  coordinatorId integer REFERENCES adminUsers (Id),
+  eventName varchar(100) REFERENCES eventsList (eventName)
+)engine=innodb;
+
+create table if not exists adminUsers(
+   Id integer primary key auto_increment,
+   username varchar(100) unique NOT NULL,
+   password varchar(100) NOT NULL
 )engine=innodb;
