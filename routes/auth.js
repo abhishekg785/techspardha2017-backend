@@ -13,30 +13,6 @@ router.get('/login',function(req, res, next) {
     res.render('login');
 });
 
-// router.post('/login',
-//   // function(req, res, next) {
-//   passport.authenticate('local',
-//    {
-//     successRedirect: '/',
-//     failureRedirect: '/auth/login'
-//   });
-//   // , function(err, user, info) {
-//   //   if(err) {
-//   //     res.render('login');
-//   //   }
-//   //   if(!user) {
-//   //     res.render('login');
-//   //   }
-//   //   req.logIn(user, function(err) {
-//   //     if(err) {
-//   //       res.render('login');
-//   //     } else {
-//   //       res.redirect('/');
-//   //        }
-//   //     });
-//   // })(req, res, next);
-// });
-
 router.post('/login', passport.authenticate('local', {
   successRedirect : '/',
   failureRedirect : '/auth/login'
