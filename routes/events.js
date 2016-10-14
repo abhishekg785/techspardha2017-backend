@@ -21,7 +21,7 @@ router.post('/update',function(req,res,next) {
       //  var venue = "ads";
       //  var time = "2:20:20";
       //  var status = "uo";
-       var addEvent = new Model.Event({eventName: eventName});
+       var addEvent = new Model.Event({eventName: eventName});     //Updates a particular event
        addEvent.save({description: description, venue: venue, time: time, status: status},{patch: true}).then(function() {
           console.log("Event Updated Successfully");
        });
