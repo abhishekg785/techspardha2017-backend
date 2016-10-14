@@ -30,8 +30,9 @@ router.post('/signup',function(req, res, next) {
    var user = req.body;
    var usernamePromise = null;
    usernamePromise = new Model.User({username: user.username}).fetch();
-
+   // model is not null means there already exsist a username so redirected to signup
    usernamePromise.then(function(model) {
+      
       if(model) {
          res.render('signup');
       } else {

@@ -37,4 +37,16 @@ router.get('/add',function(req,res,next){
    }
 });
 
+/*api for getting all events */
+router.get('/all',function(req,res,next) {
+  new Model.Event().fetchAll().
+  then(function(model) {
+  res.send(model.toJSON());
+  })
+  .catch(function(error) {
+   console.error(error);
+  });
+
+});
+
 module.exports = router;

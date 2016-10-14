@@ -15,7 +15,7 @@ var index = require('./routes/index');
 var auth = require('./routes/auth');
 var events = require('./routes/events');
 var Model = require('./models/model');
-
+var studentUser = require('./routes/studentUser');
 var app = express();
 
 // view engine setup
@@ -37,6 +37,7 @@ app.use(passport.session());
 app.use('/',index);
 app.use('/auth',auth);
 app.use('/api/events',events);
+app.use('/api/studentUser',studentUser);
 
 /*
 //catch 404 and forward to error handler
