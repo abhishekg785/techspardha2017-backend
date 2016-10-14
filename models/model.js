@@ -6,8 +6,7 @@ var studentUsers = DB.Model.extend({
 });
 
 var studentDetails = DB.Model.extend({
-  tableName: 'studentDetails',
-  idAttribute: 'Id'
+  tableName: 'studentDetails'
 });
 
 var eventsList = DB.Model.extend({

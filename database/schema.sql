@@ -14,6 +14,7 @@ create table if not exists studentUsers(
 
 create table if not exists studentDetails(
   Id integer REFERENCES studentUsers (Id) ,
+  username varchar(100) REFERENCES studentUsers (username),
   rollNo integer(10) NOT NULL,
   phoneNo integer(15) NOT NULL,
   interests varchar(200) NOT NULL,
