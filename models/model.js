@@ -12,17 +12,17 @@ var studentDetails = DB.Model.extend({
 
 var eventsList = DB.Model.extend({
   tableName: 'eventsList',
-  idAttribute: 'EventId'
+  idAttribute: 'eventName'
 });
 
-var adminUser = DB.Model.extend({
-  tableName: 'adminUser',
+var adminUsers = DB.Model.extend({
+  tableName: 'adminUsers',
   idAttribute: 'Id'
 });
 
 module.exports = {
    User: studentUsers,
    Details: studentDetails,
-   Admin: adminUser,
+   Admin: adminUsers,
    Event: eventsList
 };

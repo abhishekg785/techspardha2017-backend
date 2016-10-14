@@ -13,7 +13,8 @@ create table if not exists studentUsers(
 )engine=innodb;
 
 create table if not exists studentDetails(
-    Id integer REFERENCES studentUsers (Id) ,
+    Id integer REFERENCES studentUsers (Id),
+    username integer REFERENCES studentUsers (username),
     rollNo integer(10) NOT NULL,
     phoneNo integer(15) NOT NULL,
     interests varchar(200) NOT NULL,

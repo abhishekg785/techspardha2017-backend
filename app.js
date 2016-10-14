@@ -30,7 +30,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'secret code'}));
+app.use(session({secret: 'secret code',
+                 resave: true,
+                 saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -75,7 +77,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
     var user = data;
     if(user === null) {
       return done(null, false, {message: 'Invalid username or password'});
-    } 
+    }
     else {
         user = data.toJSON();
         if(!bcrypt.compareSync(password, user.password)) {
